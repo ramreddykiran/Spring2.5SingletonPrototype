@@ -7,6 +7,8 @@ import com.scope.services.demo1.PrototypeService;
 import com.scope.services.demo1.SingletonService;
 import com.scope.services.demo2.PrototypeSubClass;
 import com.scope.services.demo2.SingletonSuperClass;
+import com.scope.services.demo3.PrototypeSuperClass;
+import com.scope.services.demo3.SingletonSubClass;
 
 public class ScopeDemo {
     public static void main( String[] args ) {
@@ -17,11 +19,38 @@ public class ScopeDemo {
     	//scopeDemo.demo1(context);
     	
     	//super class is singleton and subclass is prototype
-    	scopeDemo.demo2(context);
+    	//scopeDemo.demo2(context);
     	
     	//super class is prototype and subclass is singleton
+    	scopeDemo.demo3(context);
     	
+    	//super class prototype and subclass prototype
     }
+
+	private void demo3(ApplicationContext context) {
+		System.out.println("demo3 started");
+		PrototypeSuperClass prototypeSuperClass1 = (PrototypeSuperClass) context.getBean("prototypeSuperClass");
+		SingletonSubClass scSub1 = prototypeSuperClass1.getSingletonSubClass();
+		
+		PrototypeSuperClass prototypeSuperClass2 = (PrototypeSuperClass) context.getBean("prototypeSuperClass");
+		SingletonSubClass scSub2 = prototypeSuperClass2.getSingletonSubClass();
+		if(prototypeSuperClass1==prototypeSuperClass2){
+			System.out.println("prototype super classes are same");
+		} else {
+			System.out.println("prototype super classes are different ");
+			System.out.println("prototypeSuperClass1 = "+prototypeSuperClass1+ "   prototypeSuperClass2 = " +prototypeSuperClass2);
+		}
+		
+		
+		if(scSub1==scSub2){
+			System.out.println("singleton sub classes are same");
+			
+		}else {
+			System.out.println("singleton sub classes are different ");
+			System.out.println("singletonSubClass1 = "+scSub1+ "   singletonSubClass2 = " +scSub2);
+		}
+		System.out.println("demo3 completed");
+	}
 
 	private void demo2(ApplicationContext context) {
 		System.out.println("demo2 started");

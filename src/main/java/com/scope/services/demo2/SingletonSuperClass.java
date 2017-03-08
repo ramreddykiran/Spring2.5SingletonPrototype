@@ -3,10 +3,10 @@ package com.scope.services.demo2;
 
 public class SingletonSuperClass {
 	
-	public SingletonSuperClass(){
-		System.out.println("SingletonSuperClass DC");
+	/*public SingletonSuperClass(){
+		System.out.println("Demo2 SingletonSuperClass DC");
 	}
-	
+	*/
 	private PrototypeSubClass prototypeSubClass;
 	
 	public PrototypeSubClass getPrototypeSubClass() {

@@ -10,5 +10,10 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
    <bean id="singletonSuperClass" class="com.scope.services.demo2.SingletonSuperClass">
   	 <property name="prototypeSubClass" ref="pcSub"></property>
    </bean>
+   
+   <bean id="prototypeSuperClass" class="com.scope.services.demo3.PrototypeSuperClass" scope="prototype">
+ 		<property name="singletonSubClass" ref="scSub"></property>
+   </bean>
+   <bean id="scSub" class="com.scope.services.demo3.SingletonSubClass"/>
 		
 </beans>
