@@ -1,21 +1,21 @@
-package com.common;
+package com.scope.demo;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.customer.services.demo1.PrototypeService;
-import com.customer.services.demo1.SingletonService;
+import com.scope.services.demo1.PrototypeService;
+import com.scope.services.demo1.SingletonService;
 
-public class App {
+public class ScopeDemo {
     public static void main( String[] args ) {
-    	ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"Spring-Customer.xml"});
-    	App app = new App();
+    	ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"application-context.xml"});
+    	ScopeDemo scopeDemo = new ScopeDemo();
     	
     	//This will demonstrate single class level scope
-    	app.demo1(context);
+    	scopeDemo.demo1(context);
     	
     	//super class is singleton and subclass is prototype
-    	app.demo2(context);
+    	scopeDemo.demo2(context);
     }
 
 	private void demo2(ApplicationContext context) {

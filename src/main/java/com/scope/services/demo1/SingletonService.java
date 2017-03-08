@@ -1,4 +1,4 @@
-package com.customer.services.demo1;
+package com.scope.services.demo1;
 
 public class SingletonService {
 	
