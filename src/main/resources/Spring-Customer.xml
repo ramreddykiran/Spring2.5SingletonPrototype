@@ -3,6 +3,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
-   <bean id="customerService" class="com.customer.services.CustomerService" scope="prototype"/>
+   <bean id="prototypeService" class="com.customer.services.demo1.PrototypeService" scope="prototype"/>
+   
+   <bean id="singletonService" class="com.customer.services.demo1.SingletonService"/>
 		
 </beans>
