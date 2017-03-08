@@ -9,6 +9,8 @@ import com.scope.services.demo2.PrototypeSubClass;
 import com.scope.services.demo2.SingletonSuperClass;
 import com.scope.services.demo3.PrototypeSuperClass;
 import com.scope.services.demo3.SingletonSubClass;
+import com.scope.services.demo4.PrototypeSubClassDemo4;
+import com.scope.services.demo4.PrototypeSuperClassDemo4;
 
 public class ScopeDemo {
     public static void main( String[] args ) {
@@ -22,36 +24,35 @@ public class ScopeDemo {
     	//scopeDemo.demo2(context);
     	
     	//super class is prototype and subclass is singleton
-    	scopeDemo.demo3(context);
+    	//scopeDemo.demo3(context);
     	
     	//super class prototype and subclass prototype
+    	scopeDemo.demo4(context);
     }
 
-	private void demo3(ApplicationContext context) {
-		System.out.println("demo3 started");
-		PrototypeSuperClass prototypeSuperClass1 = (PrototypeSuperClass) context.getBean("prototypeSuperClass");
-		SingletonSubClass scSub1 = prototypeSuperClass1.getSingletonSubClass();
-		
-		PrototypeSuperClass prototypeSuperClass2 = (PrototypeSuperClass) context.getBean("prototypeSuperClass");
-		SingletonSubClass scSub2 = prototypeSuperClass2.getSingletonSubClass();
-		if(prototypeSuperClass1==prototypeSuperClass2){
-			System.out.println("prototype super classes are same");
-		} else {
-			System.out.println("prototype super classes are different ");
-			System.out.println("prototypeSuperClass1 = "+prototypeSuperClass1+ "   prototypeSuperClass2 = " +prototypeSuperClass2);
-		}
-		
-		
-		if(scSub1==scSub2){
-			System.out.println("singleton sub classes are same");
-			
-		}else {
-			System.out.println("singleton sub classes are different ");
-			System.out.println("singletonSubClass1 = "+scSub1+ "   singletonSubClass2 = " +scSub2);
-		}
-		System.out.println("demo3 completed");
+	private void demo1(ApplicationContext context) {
+		System.out.println("demo1 started");
+		PrototypeService prototypeService1 = (PrototypeService)context.getBean("prototypeService");
+    	prototypeService1.setPrototypeMessage("prototype service message");
+    	System.out.println("Prototype Message : " + prototypeService1.getPrototypeMessage());
+    	
+    	//retrieve it again
+    	PrototypeService prototypeService2 = (PrototypeService)context.getBean("prototypeService");
+    	
+    	System.out.println("Prototyppe Message : " + prototypeService2.getPrototypeMessage()); 
+    	// it displays null as the scope is prototype
+    	
+    	SingletonService singletonService1 = (SingletonService) context.getBean("singletonService");
+    	singletonService1.setSingletonMessage("singleton service message");
+    	System.out.println("singleton message "+singletonService1.getSingletonMessage());
+    	
+    	SingletonService singletonService2 = (SingletonService) context.getBean("singletonService");
+    	System.out.println("singleton message "+singletonService2.getSingletonMessage());
+    	//it displays singletonService1 message as the scope is singleton
+    	
+    	System.out.println("demo1 completed");
 	}
-
+	
 	private void demo2(ApplicationContext context) {
 		System.out.println("demo2 started");
 		SingletonSuperClass singletonSuperClass1 = (SingletonSuperClass) context.getBean("singletonSuperClass");
@@ -77,27 +78,55 @@ public class ScopeDemo {
 		}
 		System.out.println("demo2 completed");
 	}
-
-	private void demo1(ApplicationContext context) {
-		System.out.println("demo1 started");
-		PrototypeService prototypeService1 = (PrototypeService)context.getBean("prototypeService");
-    	prototypeService1.setPrototypeMessage("prototype service message");
-    	System.out.println("Prototype Message : " + prototypeService1.getPrototypeMessage());
-    	
-    	//retrieve it again
-    	PrototypeService prototypeService2 = (PrototypeService)context.getBean("prototypeService");
-    	
-    	System.out.println("Prototyppe Message : " + prototypeService2.getPrototypeMessage()); 
-    	// it displays null as the scope is prototype
-    	
-    	SingletonService singletonService1 = (SingletonService) context.getBean("singletonService");
-    	singletonService1.setSingletonMessage("singleton service message");
-    	System.out.println("singleton message "+singletonService1.getSingletonMessage());
-    	
-    	SingletonService singletonService2 = (SingletonService) context.getBean("singletonService");
-    	System.out.println("singleton message "+singletonService2.getSingletonMessage());
-    	//it displays singletonService1 message as the scope is singleton
-    	
-    	System.out.println("demo1 completed");
+	
+	private void demo3(ApplicationContext context) {
+		System.out.println("demo3 started");
+		PrototypeSuperClass prototypeSuperClass1 = (PrototypeSuperClass) context.getBean("prototypeSuperClass");
+		SingletonSubClass scSub1 = prototypeSuperClass1.getSingletonSubClass();
+		
+		PrototypeSuperClass prototypeSuperClass2 = (PrototypeSuperClass) context.getBean("prototypeSuperClass");
+		SingletonSubClass scSub2 = prototypeSuperClass2.getSingletonSubClass();
+		if(prototypeSuperClass1==prototypeSuperClass2){
+			System.out.println("prototype super classes are same");
+		} else {
+			System.out.println("prototype super classes are different ");
+			System.out.println("prototypeSuperClass1 = "+prototypeSuperClass1+ "   prototypeSuperClass2 = " +prototypeSuperClass2);
+		}
+		
+		
+		if(scSub1==scSub2){
+			System.out.println("singleton sub classes are same");
+			
+		}else {
+			System.out.println("singleton sub classes are different ");
+			System.out.println("singletonSubClass1 = "+scSub1+ "   singletonSubClass2 = " +scSub2);
+		}
+		System.out.println("demo3 completed");
 	}
+	
+	private void demo4(ApplicationContext context) {
+		System.out.println("demo4 started");
+		PrototypeSuperClassDemo4 prototypeSuperClass1Demo4 = (PrototypeSuperClassDemo4) context.getBean("prototypeSuperClassDemo4");
+		PrototypeSubClassDemo4 pcSub1Demo4 = prototypeSuperClass1Demo4.getPrototypeSubClassDemo4();
+		
+		PrototypeSuperClassDemo4 prototypeSuperClass2Demo4 = (PrototypeSuperClassDemo4) context.getBean("prototypeSuperClassDemo4");
+		PrototypeSubClassDemo4 pcSub2Demo4 = prototypeSuperClass2Demo4.getPrototypeSubClassDemo4();
+		if(prototypeSuperClass1Demo4==prototypeSuperClass2Demo4){
+			System.out.println("prototype super classes are same");
+		} else {
+			System.out.println("prototype super classes are different ");
+			System.out.println("prototypeSuperClass1 = "+prototypeSuperClass1Demo4+ "   prototypeSuperClass2 = " +prototypeSuperClass2Demo4);
+		}
+		
+		
+		if(pcSub1Demo4==pcSub2Demo4){
+			System.out.println("prototype sub classes are same");
+			
+		}else {
+			System.out.println("prototype sub classes are different ");
+			System.out.println("prototypeSubClass1Demo4 = "+pcSub1Demo4+ "   prototypeSubClass2Demo4 = " +pcSub2Demo4);
+		}
+		System.out.println("demo4 completed");
+	}
+
 }
