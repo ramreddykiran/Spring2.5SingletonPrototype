@@ -4,7 +4,11 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
    <bean id="prototypeService" class="com.scope.services.demo1.PrototypeService" scope="prototype"/>
-   
    <bean id="singletonService" class="com.scope.services.demo1.SingletonService"/>
+   
+   <bean id="pcSub" class="com.scope.services.demo2.PrototypeSubClass" scope="prototype"/>
+   <bean id="singletonSuperClass" class="com.scope.services.demo2.SingletonSuperClass">
+  	 <property name="prototypeSubClass" ref="pcSub"></property>
+   </bean>
 		
 </beans>
